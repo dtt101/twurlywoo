@@ -39,5 +39,5 @@ func handler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	gotenv.Load()
 	http.HandleFunc("/", handler)
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":"+os.Getenv("PORT"), nil)
 }
