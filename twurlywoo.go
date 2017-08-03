@@ -12,7 +12,9 @@ import (
 func getClient() *anaconda.TwitterApi {
 	anaconda.SetConsumerKey(os.Getenv("TWITTER_CONSUMER_KEY"))
 	anaconda.SetConsumerSecret(os.Getenv("TWITTER_CONSUMER_SECRET"))
-	api := anaconda.NewTwitterApi(os.Getenv("TWITTER_ACCESS_TOKEN"), os.Getenv("TWITTER_ACCESS_TOKEN_SECRET"))
+	api := anaconda.NewTwitterApi(
+		os.Getenv("TWITTER_ACCESS_TOKEN"),
+		os.Getenv("TWITTER_ACCESS_TOKEN_SECRET"))
 	return api
 }
 
@@ -28,7 +30,6 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	for _, tweet := range searchResult.Statuses {
 		fmt.Fprintln(w, tweet.Text)
 	}
-
 }
 
 func main() {
