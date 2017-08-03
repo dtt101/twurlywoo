@@ -19,16 +19,20 @@ func getClient() *anaconda.TwitterApi {
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	api := getClient()
-	fmt.Fprintf(w, "URLs from your tweets. Woo. %s! \n", r.URL.Path[1:])
-	fmt.Fprintln(w, "Twitter client initialized", *api.Credentials)
-	searchResult, err := api.GetSearch("golang", nil)
+	fmt.Fprintf(w, "<p>URLs from my tweets. There are no words. Woo.</p>")
+	homeResult, err := api.GetHomeTimeline(nil)
 	if err != nil {
 		panic(err)
 	}
-	fmt.Fprintln(w, searchResult.Statuses)
-	for _, tweet := range searchResult.Statuses {
-		fmt.Fprintln(w, tweet.Text)
+	for _, tweet := range homeResult {
+		for _, url := range tweet.Entities.Urls {
+			if url.Expanded_url != "" {
+				fmt.Fprintf(w, "<a href=\"%s\">%[1]s</a>\n", url.Expanded_url)
+				fmt.Fprintln(w, "<br>")
+			}
+		}
 	}
 }
 
