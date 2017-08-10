@@ -1,8 +1,8 @@
-= Twurlywoo
+# Twurlywoo
 
 Cuts to the end and just shows the links from your twitter timeline.
 
-= Development
+## Development
 
 You need to have installed go and godeps.
 
@@ -26,6 +26,6 @@ go run twurlywoo.go
 
 Visit http://localhost:8080
 
-= Production
+## Production
 
 Deployed to heroku at https://twurlywoo.herokuapp.com/
